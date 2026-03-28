@@ -1,4 +1,8 @@
 import SwiftUI
+import PhotosUI
+#if os(iOS)
+import UIKit
+#endif
 
 /// 首页视图 - 应用主界面
 ///
@@ -30,6 +34,25 @@ struct HomeView: View {
 
     /// AI 图像服务实例
     private let aiService = AIImageService()
+
+    // MARK: - Image Picker State
+
+    /// 选中的图片
+    @State private var selectedImage: UIImage?
+
+    /// 显示图片选择器
+    @State private var showImagePicker = false
+
+    /// 选中的 PHPicker 项目
+    @State private var pickerItem: PhotosPickerItem?
+
+    // MARK: - Voice Recording State
+
+    /// 是否正在录音
+    @State private var isRecording = false
+
+    /// 录音会话
+    @StateObject private var voiceRecorder = VoiceRecorder()
 
     /// 背景色 - 浅蓝灰色
     private let bgColor = Color(red: 0.93, green: 0.95, blue: 0.97)
@@ -299,11 +322,37 @@ struct HomeView: View {
     // MARK: - Input Bar (liquid glass)
     private var inputBar: some View {
         HStack(spacing: 10) {
-            Button(action: {}) {
+            // 图片按钮
+            PhotosPicker(selection: $pickerItem, matching: .images) {
                 Image(systemName: "photo")
                     .font(.system(size: 17))
                     .foregroundColor(.black.opacity(0.5))
                     .frame(width: 36, height: 36)
+            }
+            .onChange(of: pickerItem) { oldItem, newItem in
+                Task {
+                    if let data = try? await newItem?.loadTransferable(type: Data.self),
+                       let uiImage = UIImage(data: data) {
+                        selectedImage = uiImage
+                        showImagePicker = true
+                    }
+                }
+            }
+            .sheet(isPresented: $showImagePicker) {
+                if let image = selectedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .toolbar {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                Button("完成") {
+                                    selectedImage = nil
+                                    showImagePicker = false
+                                }
+                            }
+                        }
+                }
             }
 
             HStack(spacing: 8) {
@@ -333,12 +382,32 @@ struct HomeView: View {
                     .stroke(Color.white.opacity(0.15), lineWidth: 0.5)
             )
 
-            Button(action: {}) {
-                Image(systemName: "mic")
+            // 语音按钮 - 长按录音
+            Button(action: {
+                voiceRecorder.stopRecording()
+                withAnimation(.spring(response: 0.15)) {
+                    isRecording = false
+                }
+                // 停止录音后，将语音转文字结果填入输入框
+                let text = voiceRecorder.getTranscribedText()
+                if !text.isEmpty {
+                    promptText = text
+                }
+            }) {
+                Image(systemName: isRecording ? "mic.slash.fill" : "mic.fill")
                     .font(.system(size: 17))
-                    .foregroundColor(.black.opacity(0.5))
+                    .foregroundColor(isRecording ? .red : .black.opacity(0.5))
                     .frame(width: 36, height: 36)
             }
+            .simultaneousGesture(
+                LongPressGesture(minimumDuration: 0.3)
+                    .onChanged { _ in
+                        withAnimation(.spring(response: 0.15)) {
+                            isRecording = true
+                        }
+                        voiceRecorder.startRecording()
+                    }
+            )
 
             Button(action: {}) {
                 Image(systemName: "plus")
