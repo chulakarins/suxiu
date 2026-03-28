@@ -3,10 +3,16 @@
 *.xcuserstate
 *.xcscmblueprint
 *.hmap
-*.hmap
 *.ipa
 *.dSYM.zip
 *.dSYM
+
+# Build - 编译产物
+.build/
+DerivedData/
+Build/
+*.o
+*.a
 
 # CocoaPods
 Pods/
@@ -21,13 +27,6 @@ Carthage/Build/
 Packages/
 Package.pins
 Package.resolved
-
-# Build
-DerivedData/
-Build/
-*.o
-*.a
-*.framework
 
 # Playgrounds
 timeline.xctimeline
