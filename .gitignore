@@ -1,0 +1,52 @@
+# Xcode
+.DS_Store
+*.xcuserstate
+*.xcscmblueprint
+*.hmap
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# CocoaPods
+Pods/
+*.xcworkspace
+!default.xcworkspace
+
+# Carthage
+Carthage/Build/
+
+# Swift Package Manager
+.swiftpm/
+Packages/
+Package.pins
+Package.resolved
+
+# Build
+DerivedData/
+Build/
+*.o
+*.a
+*.framework
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Secrets
+*.env
+*.secret
+Config/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Logs
+*.log
+
+# Temp
+*.tmp
+*.swp
+*~
