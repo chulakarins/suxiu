@@ -1,0 +1,57 @@
+# 苏绣 AI 后端配置文件
+
+app:
+  name: "苏绣 AI 后端"
+  version: "1.0.0"
+  debug: false
+
+# JWT 配置
+jwt:
+  secret_key: "your-secret-key-change-in-production"
+  algorithm: "HS256"
+  access_token_expire_minutes: 1440  # 24 小时
+  refresh_token_expire_days: 30
+
+# 数据库配置
+database:
+  url: "postgresql://user:password@localhost:5432/suxiu_ai"
+  pool_size: 10
+  max_overflow: 20
+
+# Redis 配置
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: null
+
+# 阿里云配置
+aliyun:
+  region: "cn-hangzhou"
+  access_key_id: "YOUR_ACCESS_KEY_ID"
+  access_key_secret: "YOUR_ACCESS_KEY_SECRET"
+
+  # 通义万相 API Key (DashScope)
+  dashscope_api_key: "sk-xxx"
+
+  # OSS 配置
+  oss:
+    bucket: "suxiu-ai-designs"
+    endpoint: "oss-cn-hangzhou.aliyuncs.com"
+    # 上传凭证过期时间 (秒)
+    sts_token_expire: 3600
+
+# AI 生成配置
+ai:
+  # 任务轮询配置
+  poll_interval_seconds: 5
+  max_poll_attempts: 60  # 最多轮询 5 分钟
+
+  # 默认生成参数
+  default_size: "1280*1280"
+  default_style: "traditional"
+
+# 日志配置
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

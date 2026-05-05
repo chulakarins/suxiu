@@ -4,13 +4,15 @@
 <dict>
 	<key>MinimumOSVersion</key>
 	<string>14.0</string>
-	<key>NSAllowsArbitraryLoads</key>
-	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
 	</dict>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>苏绣 AI 需要访问本地网络以连接后端服务</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_http._tcp.</string>
