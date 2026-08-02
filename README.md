@@ -1,217 +1,138 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/platform-iOS%2026%2B-blue?style=for-the-badge&logo=apple" alt="Platform">
-  <img src="https://img.shields.io/badge/Swift-6.0-orange?style=for-the-badge&logo=swift" alt="Swift">
-  <img src="https://img.shields.io/badge/SwiftUI-5.0-purple?style=for-the-badge&logo=swift" alt="SwiftUI">
-  <img src="https://img.shields.io/badge/AI-DashScope-green?style=for-the-badge&logo=alibaba" alt="AI">
-  <img src="https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge" alt="License">
-</p>
+# 苏绣 AI · Suxiu AI
 
-<h1 align="center">🧵 苏绣 AI · Suxiu AI</h1>
+> 以 SwiftUI 构建的苏绣文化学习与 AI 创作比赛演示应用。当前版本采用完全本地的 Mock 生图流程，不需要 API Key，也不依赖生成服务网络。
 
-<p align="center">
-  <strong>当千年苏绣遇到人工智能</strong><br>
-  <em>When Millennia-Old Suzhou Embroidery Meets Artificial Intelligence</em>
-</p>
+[![Platform](https://img.shields.io/badge/platform-iOS%2026%2B-0A84FF)](https://developer.apple.com/ios/)
+[![Swift](https://img.shields.io/badge/Swift-5-orange)](https://swift.org/)
+[![UI](https://img.shields.io/badge/UI-SwiftUI-purple)](https://developer.apple.com/xcode/swiftui/)
+[![Mode](https://img.shields.io/badge/AI-Mock%20Offline-2E8B57)](#mock-生图流程)
 
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Noto+Sans+SC&weight=500&size=18&duration=3000&pause=1000&color=8B5E3C&center=true&vCenter=true&width=500&lines=%E4%BC%A0%E7%BB%9F%E9%9D%9E%E9%81%97+%C3%97+%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD;%E4%BB%8E%E5%88%9B%E6%84%8F%E5%88%B0%E5%AE%9E%E7%89%A9%C2%B7%E4%B8%80%E9%94%AE%E6%88%90%E7%BB%A3;%E8%AE%A9%E6%AF%8F%E4%B8%AA%E4%BA%BA%E9%83%BD%E6%88%90%E4%B8%BA%E8%8B%8F%E7%BB%A3%E8%AE%BE%E8%AE%A1%E5%B8%88" alt="Tagline">
-</p>
+## 当前版本
 
----
+这是一个可离线运行、适合比赛现场展示的原型：
 
-## 📖 项目简介 · About
+- 19 张本地苏绣候选图，按提示词关键词匹配结果。
+- 正常生成流程每次随机等待约 5–8 秒，并展示排队、生成、下载和保存进度。
+- 支持成功、快速、慢速、服务失败、超时、离线和取消场景。
+- 生成结果保存到设备本地，历史记录使用 SwiftData 管理。
+- 文化、学习、社区和市集主内容均随 App 打包；只有外部资料链接需要网络。
+- 当前不会调用付费 AI、不会产生真实交易，也没有真实社区账号或后端依赖。
 
-**苏绣 AI** 是一个创新的 **C2M（Customer-to-Manufacturer）** 平台应用，将国家级非物质文化遗产「苏绣」与前沿 AI 技术深度融合。用户只需通过**文字描述、语音输入或上传参考图片**，AI 即可在数十秒内生成专业的苏绣设计图，并一键连接合作工厂进行实物制作 —— 实现从**创意到实物**的完整数字化闭环。
+## 功能概览
 
-> *Suxiu AI is an innovative C2M platform that merges China's national intangible cultural heritage — Suzhou Embroidery — with cutting-edge AI. Describe your idea in text, voice, or images, and the AI generates professional embroidery designs, then connects directly to partner factories for physical production.*
+| 模块 | 内容 |
+|---|---|
+| 文化 | 六条文化线索、专题导读、馆藏/文章/视频来源链接 |
+| 学习 | 微课程、针法步骤、阶段练习与本地演示流程 |
+| AI 创作 | 结构化创作简报、文字/语音/参考图输入、Mock 生图 |
+| 作品 | 本地保存、历史记录、收藏、分享、删除 |
+| 社区 | 六条创作记录、分类筛选、开放馆藏来源、可用的本地研习交流 |
+| 市集 | 现货、AI 定制和纹样授权的比赛演示流程 |
 
----
-
-## ✨ 核心亮点 · Highlights
-
-<table>
-  <tr>
-    <td width="50%">
-      <h3>🎨 AI 创意生成</h3>
-      <p>接入阿里云 DashScope（通义万相）大模型，支持文生图、图生图，30 秒内生成多套专业苏绣设计方案</p>
-    </td>
-    <td width="50%">
-      <h3>🎤 多模态输入</h3>
-      <p>支持文字描述、语音录入（实时语音转文字）、参考图片上传，让创意表达无障碍</p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <h3>🧬 C2M 商业闭环</h3>
-      <p>从创意到设计、从设计到生产，完整的数字化链路，打通非遗商业化最后一公里</p>
-    </td>
-    <td>
-      <h3>🫧 iOS 26 Liquid Glass</h3>
-      <p>率先适配 Apple 最新 Liquid Glass 设计语言，毛玻璃质感的沉浸式交互体验</p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <h3>🏛️ 文化传承创新</h3>
-      <p>用科技让千年苏绣技艺焕发新生，降低传统工艺的使用门槛，让更多人感受非遗之美</p>
-    </td>
-    <td>
-      <h3>🛍️ 作品市场</h3>
-      <p>内置文创商城，用户可以浏览、购买 AI 生成的设计作品，或将其制作为实物绣品</p>
-    </td>
-  </tr>
-</table>
-
----
-
-## 🏗️ 技术架构 · Architecture
-
-```
-┌─────────────────────────────────────┐
-│           📱 SwiftUI Layer           │
-│   HomeView · MarketView · Profile    │
-│   VoiceRecorder · ImagePicker       │
-├─────────────────────────────────────┤
-│           🧠 ViewModel Layer         │
-│   ContentViewModel · AI Service     │
-├─────────────────────────────────────┤
-│           🌐 API / AI Layer          │
-│   DashScope (通义万相) · REST API    │
-├─────────────────────────────────────┤
-│           💾 Data Layer              │
-│   Core Data · Cloud Database        │
-└─────────────────────────────────────┘
-```
-
-### 技术栈 · Tech Stack
-
-| 层级 | 技术选型 | 说明 |
-|------|---------|------|
-| 🖥️ 前端框架 | **SwiftUI 5.0** | Apple 最新声明式 UI 框架 |
-| 🎯 最低版本 | **iOS 26.0** | 面向下一代 Apple 操作系统 |
-| 🛠️ 开发环境 | **Xcode 26.2** | 最新开发工具链 |
-| 🏛️ 架构模式 | **MVVM** | Model-View-ViewModel |
-| 🤖 AI 引擎 | **阿里云 DashScope** | 通义万相文生图 / 图生图 |
-| 🎤 语音识别 | **Speech Framework** | 实时语音转文字（中英文） |
-| 📦 本地存储 | **Core Data** | Apple 原生持久化方案 |
-| 🎨 设计语言 | **Liquid Glass** | iOS 26 全新视觉风格 |
-
----
-
-## 📂 项目结构 · Structure
-
-```
-suxiu test/
-├── 📱 Core/Base/
-│   └── LiquidGlassView.swift        # iOS 26 Liquid Glass 扩展
-├── 🎨 Features/
-│   ├── Profile/ProfileView.swift     # 个人中心
-│   └── Voice/VoiceRecorder.swift     # 语音录制 + 实时转写
-├── 🏠 HomeView.swift                 # 主界面（AI 生成 + Tab 导航）
-├── 🧠 ContentView.swift              # 内容视图
-├── 🚀 suxiu_testApp.swift            # 应用入口
-├── 📦 Item.swift                     # 数据模型
-└── 📋 suxiu-test-Info.plist          # 应用配置
-```
-
----
-
-## 🚀 快速开始 · Quick Start
+## 快速开始
 
 ### 环境要求
 
-- macOS 26+ with Xcode 26.2+
-- iOS 26.0+ 模拟器或真机
-- 阿里云 DashScope API Key
+- macOS
+- Xcode 26 或更新版本
+- iOS 26.0 或更新版本的模拟器/真机
 
-### 运行项目
+### 运行
 
 ```bash
-# 1. 克隆仓库
 git clone https://github.com/chulakarins/suxiu.git
 cd suxiu
-
-# 2. 打开 Xcode 项目
 open "suxiu test.xcodeproj"
-
-# 3. 配置 API Key
-# 编辑 suxiu_testApp.swift，填入你的 DashScope API Key
-
-# 4. 选择 iOS 26 模拟器，运行 (⌘R)
 ```
 
----
+在 Xcode 中选择 `suxiu test` Scheme 和一个 iOS 模拟器，按 `⌘R`。当前版本不需要配置服务器地址或 API Key。
 
-## 🗺️ 路线图 · Roadmap
+### 命令行验证
 
-- [x] AI 文生图核心功能
-- [x] 语音输入 + 实时转文字
-- [x] iOS 26 Liquid Glass 适配
-- [x] 完整的项目文档 & 设计系统
-- [ ] 图生图（以图搜图/风格迁移）
-- [ ] 多针法识别与推荐
-- [ ] 工厂订单系统对接
-- [ ] 用户作品社区
-- [ ] iPad / macOS 多端适配
-- [ ] App Store 上架
+如果 Xcode 安装在 `/Applications/Xcode-beta.app`：
 
----
+```bash
+DEVELOPER_DIR=/Applications/Xcode-beta.app/Contents/Developer \
+xcodebuild -project "suxiu test.xcodeproj" \
+  -scheme "suxiu test" \
+  -destination "generic/platform=iOS Simulator" \
+  CODE_SIGNING_ALLOWED=NO build
+```
 
-## 📄 文档 · Documentation
+测试命令和模拟器选择方法见[离线开发手册](./OFFLINE_DEVELOPMENT_GUIDE.md)。
 
-| 文档 | 说明 |
-|------|------|
-| [项目综合分析报告](./项目综合分析报告.md) | 完整的技术架构、代码分析、安全审计 |
-| [设计系统文档](./设计系统文档.md) | 颜色/字体/间距/动效设计规范 |
-| [后端开发部署指南](./后端开发部署指南.md) | API 设计、数据库、部署方案 |
+## 推荐演示路线
 
----
+1. 在“文化”查看苏绣线索与专题资料。
+2. 切换“学习”，打开一节针法课程。
+3. 点击底部中央 AI 按钮，选择创作参数并输入“荷塘里的白鹤”。
+4. 等待约 5–8 秒，展示生成结果、工艺建议和“演示素材”标记。
+5. 打开右上角菜单查看生成历史，再尝试收藏或分享。
+6. 进入“社区”，筛选“馆藏研习”，打开来源或点击“交流”。
+7. 最后进入“市集”，说明从数字创意到定制流程的产品设想。
 
-## 🎯 创新价值 · Innovation
+## Mock 生图流程
 
-### 🧬 非遗 × AI：文化科技的范式创新
+```text
+创作简报 + 提示词
+        ↓
+ImageGenerating 统一接口
+        ↓
+MockImageGenerator（关键词匹配 / 稳定回退）
+        ↓
+本地 JPEG 数据
+        ↓
+Application Support/GeneratedWorks
+        ↓
+SwiftData GenerationRecord（仅保存相对路径）
+```
 
-将苏绣这一拥有 2000 余年历史的非物质文化遗产，通过生成式 AI 技术进行数字化解构与再创作，**打破传统刺绣工艺「高门槛、低效率、难传播」的困局**，让每个人都能成为苏绣设计师。
+Mock 设置入口：AI 创作页右上角 `…` → `Mock 开发设置`。比赛前建议点击“恢复演示默认设置”。
 
-### 🔗 C2M：从创意到实物的完整闭环
+## 核心目录
 
-区别于传统「AI 生图」类应用，苏绣 AI 构建了完整的 C2M 商业链路 —— AI 不仅生成设计图，更与实物生产环节深度打通，**让数字创意真正落地为可触摸的实体产品**。
+```text
+suxiu test/
+├── Core/
+│   ├── Configuration/       # 服务选择与 Mock 配置
+│   ├── Generation/          # 生图协议、状态和错误定义
+│   └── Storage/             # 图片文件与 SwiftData 记录
+├── Features/
+│   ├── AIGenerate/          # AI 创作、历史和开发设置
+│   ├── Experience/          # 文化、学习、社区、市集
+│   └── Voice/               # 语音输入与转写
+├── Services/Mock/           # Mock 生成器、场景和素材目录
+├── Resources/MockImages/    # 19 张本地候选图与清单
+└── Assets.xcassets/         # 界面与开放馆藏图片
+```
 
-### 🌏 文化出海：让世界看见中国非遗
+## 数据与离线边界
 
-以科技为媒介，将中国传统工艺推向全球市场。海外用户可通过英文界面体验「东方高定」的魅力，实现文化价值与商业价值的双循环。
+- 生图素材、社区图片和主要文本均在 App 包内。
+- 生成图片保存在应用的 `Application Support/GeneratedWorks`。
+- SwiftData 只保存图片相对路径，不保存大体积图片二进制。
+- 删除作品时先删除数据库记录，再清理对应文件，避免留下损坏历史项。
+- 文化资料、视频和开放馆藏的超链接需要网络；断网不影响核心页面与 Mock 生图。
 
----
+## 文档
 
-## 🤝 贡献者 · Contributors
+- [离线开发手册](./OFFLINE_DEVELOPMENT_GUIDE.md)
+- [项目体检报告](./PROJECT_HEALTH_CHECK.md)
+- [文化资料来源](./CULTURE_SOURCES.md)
+- [图片来源与许可](./IMAGE_SOURCES.md)
+- [视频来源](./VIDEO_SOURCES.md)
+- [后端开发部署指南](./后端开发部署指南.md)（未来真实服务参考，不是当前运行依赖）
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/chulakarins">
-        <img src="https://github.com/chulakarins.png" width="80px" style="border-radius:50%" alt="Chulakarins"/>
-        <br />
-        <b>Chulakarins</b>
-      </a>
-      <br />
-      <sub>Creator & Lead Developer</sub>
-    </td>
-  </tr>
-</table>
+## 正式 AI 接入方向
 
----
+UI 依赖 `ImageGenerating` 协议。未来接入正式服务时，实现一个新的生成器并在 `AppEnvironment` 中切换即可；图片仍应先下载并保存为本地文件，再写入历史记录。不要在客户端仓库中提交 API Key。
 
-<p align="center">
-  <sub>Made with ❤️ for Suzhou Embroidery | 以科技致敬千年匠心</sub>
-</p>
+## 项目边界
 
----
+- “AI 工艺建议”、价格、工时、专家点评、用户数据和订单均为比赛演示内容。
+- 社区开放馆藏图片明确标注来源与许可，不冒充真实用户原创。
+- 外部文章与视频只提供原页面链接，不下载或二次发布。
 
-<p align="center">
-  <a href="https://github.com/chulakarins/suxiu/stargazers">
-    <img src="https://img.shields.io/github/stars/chulakarins/suxiu?style=social" alt="Stars">
-  </a>
-  <a href="https://github.com/chulakarins/suxiu/network/members">
-    <img src="https://img.shields.io/github/forks/chulakarins/suxiu?style=social" alt="Forks">
-  </a>
-</p>
+## License
+
+源代码许可请以仓库中的许可证文件为准；第三方图片、文字和视频分别遵循来源文档中标注的许可与使用条件。

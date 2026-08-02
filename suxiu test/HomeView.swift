@@ -136,11 +136,9 @@ struct ExploreHomeView: View {
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundColor(.black)
             Spacer()
-            Button(action: {}) {
-                Text("所有")
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(.blue)
-            }
+            Text("精选")
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(.blue)
         }
     }
 
@@ -787,18 +785,14 @@ struct RecommendView: View {
             HStack {
                 Spacer()
 
-                Button(action: {}) {
-                    Image(systemName: "person.circle.fill")
-                        .font(.system(size: 28))
-                        .foregroundColor(.gray)
-                }
+                Image(systemName: "person.circle.fill")
+                    .font(.system(size: 28))
+                    .foregroundColor(.gray)
                 .padding(.leading, 12)
 
-                Button(action: {}) {
-                    Image(systemName: "heart.fill")
-                        .font(.system(size: 24))
-                        .foregroundColor(.gray)
-                }
+                Image(systemName: "heart.fill")
+                    .font(.system(size: 24))
+                    .foregroundColor(.gray)
                 .padding(.leading, 8)
             }
         }
@@ -1071,6 +1065,7 @@ struct HomeView: View {
     @State private var selectedTab: Int = 0
     @State private var navigateToAIGenerate = false
     @State private var navigateToProfile = false
+    @Namespace private var tabSelectionNamespace
 
     private let bgColor = Color(red: 0.93, green: 0.95, blue: 0.97)
     private let accentBlue = Color(red: 0.2, green: 0.48, blue: 0.95)
@@ -1080,25 +1075,32 @@ struct HomeView: View {
             ZStack(alignment: .bottom) {
                 bgColor.ignoresSafeArea(edges: .top)
 
-                contentBody
+                GeometryReader { proxy in
+                    contentBody
+                        .frame(
+                            width: proxy.size.width,
+                            height: proxy.size.height,
+                            alignment: .topLeading
+                        )
+                        .clipped()
+                }
 
                 liquidTabBar
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 12)
+                    .padding(.horizontal, 14)
+                    .padding(.bottom, 2)
+                    .offset(y: 10)
             }
-            .ignoresSafeArea(edges: .bottom)
             #if os(iOS)
-            .navigationTitle("锦绣 AI")
+            .navigationTitle(navigationTitle)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarHidden(selectedTab == 3) // 隐藏"我的"页面的导航栏
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {}) {
-                        Image(systemName: "line.3.horizontal")
-                            .font(.system(size: 18, weight: .medium))
-                            .foregroundColor(.primary)
-                    }
+                    Image("SuxiuBrandMarkV2")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 34, height: 34)
+                        .accessibilityHidden(true)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { navigateToProfile = true }) {
@@ -1124,77 +1126,87 @@ struct HomeView: View {
     private var contentBody: some View {
         switch selectedTab {
         case 0:
-            ExploreHomeView(onAICardTap: { navigateToAIGenerate = true })
+            HeritageHomeView(onAICreate: { navigateToAIGenerate = true })
         case 1:
-            MarketView(onProfileTap: { navigateToProfile = true })
+            LearningCenterView()
         case 2:
-            RecommendView()
+            CommunityHubView()
         case 3:
-            ProfileView()
+            MarketplaceHubView()
         default:
-            ExploreHomeView(onAICardTap: { navigateToAIGenerate = true })
+            HeritageHomeView(onAICreate: { navigateToAIGenerate = true })
+        }
+    }
+
+    private var navigationTitle: String {
+        switch selectedTab {
+        case 0: return "苏绣数字博物馆"
+        case 1: return "苏绣学习馆"
+        case 2: return "绣友社区"
+        case 3: return "苏绣市集"
+        default: return "锦绣 AI"
         }
     }
 
     private var liquidTabBar: some View {
         HStack(spacing: 0) {
-            tabItem(icon: "house", label: "首页", tag: 0)
-            tabItem(icon: "bag", label: "市场", tag: 1)
+            tabItem(icon: "building.columns", selectedIcon: "building.columns.fill", label: "文化", tag: 0)
+            tabItem(icon: "graduationcap", selectedIcon: "graduationcap.fill", label: "学习", tag: 1)
             magicButton
-            tabItem(icon: "doc.text", label: "推荐", tag: 2)
-            tabItem(icon: "person", label: "我的", tag: 3)
+            tabItem(icon: "bubble.left.and.bubble.right", selectedIcon: "bubble.left.and.bubble.right.fill", label: "社区", tag: 2)
+            tabItem(icon: "handbag", selectedIcon: "handbag.fill", label: "市集", tag: 3)
         }
-        .frame(height: 56)
-        .padding(.horizontal, 8)
-        .padding(.vertical, 10)
-        .glassEffect()
-        .cornerRadius(45)
-        .overlay(
-            RoundedRectangle(cornerRadius: 45)
-                .stroke(Color.white.opacity(0.3), lineWidth: 1)
-        )
-        .shadow(color: .black.opacity(0.08), radius: 12, x: 0, y: 4)
+        .frame(height: 54)
+        .padding(.horizontal, 6)
+        .padding(.vertical, 4)
+        .suxiuFloatingGlass(in: Capsule())
     }
 
     private var magicButton: some View {
         Button(action: { navigateToAIGenerate = true }) {
             ZStack {
                 Circle()
-                    .fill(LinearGradient(
-                        colors: [accentBlue, Color(red: 0.1, green: 0.35, blue: 0.9)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ))
-                    .frame(width: 50, height: 50)
-                    .shadow(color: accentBlue.opacity(0.45), radius: 12, x: 0, y: 4)
-                    .overlay(Circle().stroke(Color.white.opacity(0.3), lineWidth: 1))
+                    .fill(Color.white.opacity(0.001))
+                    .frame(width: 46, height: 46)
+                    .suxiuTintedGlass(in: Circle())
+                    .shadow(color: accentBlue.opacity(0.30), radius: 12, x: 0, y: 6)
 
-                Image(systemName: "wand.and.stars")
-                    .font(.system(size: 20, weight: .semibold))
+                Image(systemName: "scribble.variable")
+                    .font(.system(size: 18, weight: .semibold))
                     .foregroundColor(.white)
             }
         }
         .frame(maxWidth: .infinity)
+        .accessibilityLabel("打开 AI 创作工坊")
     }
 
-    private func tabItem(icon: String, label: String, tag: Int) -> some View {
+    private func tabItem(icon: String, selectedIcon: String, label: String, tag: Int) -> some View {
         Button(action: {
             withAnimation(.spring(response: 0.25)) { selectedTab = tag }
         }) {
             VStack(spacing: 3) {
-                Image(systemName: selectedTab == tag ? "\(icon).fill" : icon)
-                    .font(.system(size: 20))
+                Image(systemName: selectedTab == tag ? selectedIcon : icon)
+                    .font(.system(size: 18, weight: selectedTab == tag ? .semibold : .regular))
                     .foregroundColor(selectedTab == tag ? accentBlue : .black.opacity(0.5))
                     .scaleEffect(selectedTab == tag ? 1.08 : 1.0)
 
                 Text(label)
-                    .font(.system(size: 10, weight: selectedTab == tag ? .semibold : .regular))
+                    .font(.system(size: 10, weight: selectedTab == tag ? .semibold : .medium))
                     .foregroundColor(selectedTab == tag ? accentBlue : .black.opacity(0.5))
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 2)
+            .padding(.vertical, 5)
+            .background {
+                if selectedTab == tag {
+                    Capsule()
+                        .fill(Color.white.opacity(0.42))
+                        .matchedGeometryEffect(id: "tab-selection", in: tabSelectionNamespace)
+                }
+            }
         }
         .animation(.spring(response: 0.25), value: selectedTab)
+        .accessibilityLabel(label)
+        .accessibilityAddTraits(selectedTab == tag ? .isSelected : [])
     }
 }
 

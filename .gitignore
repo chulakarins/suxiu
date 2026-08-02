@@ -2,6 +2,8 @@
 .DS_Store
 *.xcuserstate
 *.xcscmblueprint
+xcuserdata/
+*.xcbkptlist
 *.hmap
 *.ipa
 *.dSYM.zip
@@ -46,6 +48,7 @@ Config/
 *.log
 
 # Temp
+.firecrawl/
 *.tmp
 *.swp
 *~

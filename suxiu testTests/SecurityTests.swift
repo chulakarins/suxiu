@@ -11,7 +11,7 @@ final class SecurityTests: XCTestCase {
         // 注意：这是一个意识测试，提醒开发者注意 API Key 安全
 
         let apiKeyPattern = "sk-[a-zA-Z0-9]+"
-        let apiKeyExample = "sk-d5f6f3edc558444baff5b26af58536f8"
+        let apiKeyExample = "sk-example"
 
         // 验证 API Key 格式
         let isValidFormat = !apiKeyExample.isEmpty && apiKeyExample.hasPrefix("sk-")

@@ -3,11 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>MinimumOSVersion</key>
-	<string>14.0</string>
+	<string>26.0</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
@@ -27,9 +25,5 @@
 	<string>苏绣 AI 需要使用麦克风来录制语音输入</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>苏绣 AI 需要语音识别权限来将您的语音转换为文字</string>
-	<key>com.apple.security.network.client</key>
-	<true/>
-	<key>com.apple.security.network.server</key>
-	<true/>
 </dict>
 </plist>

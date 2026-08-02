@@ -56,11 +56,35 @@ class VoiceRecorder: NSObject, ObservableObject {
     static func checkMicrophonePermission() async -> Bool {
 #if os(iOS)
         if #available(iOS 17.0, *) {
-            let status = AVAudioApplication.shared.recordPermission
-            return status == .granted
+            switch AVAudioApplication.shared.recordPermission {
+            case .granted:
+                return true
+            case .denied:
+                return false
+            case .undetermined:
+                return await withCheckedContinuation { continuation in
+                    AVAudioApplication.requestRecordPermission { granted in
+                        continuation.resume(returning: granted)
+                    }
+                }
+            @unknown default:
+                return false
+            }
         } else {
-            let status = AVAudioSession.sharedInstance().recordPermission
-            return status == .granted
+            switch AVAudioSession.sharedInstance().recordPermission {
+            case .granted:
+                return true
+            case .denied:
+                return false
+            case .undetermined:
+                return await withCheckedContinuation { continuation in
+                    AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                        continuation.resume(returning: granted)
+                    }
+                }
+            @unknown default:
+                return false
+            }
         }
 #else
         return true

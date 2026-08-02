@@ -54,8 +54,6 @@ class ContentViewModel: ObservableObject {
                 )
                 generatedImageURL = url
                 loadingText = "生成完成！"
-            } catch APIClientError.unauthenticated {
-                errorMessage = "登录已过期，请重新登录"
             } catch {
                 errorMessage = error.localizedDescription
             }
