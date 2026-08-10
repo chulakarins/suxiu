@@ -1,5 +1,5 @@
 """
-苏绣 AI 后端 - FastAPI 应用入口
+锦绣智造后端 - FastAPI 应用入口
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -26,7 +26,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
-    description="苏绣 AI 应用后端 API - 提供 AI 设计生成、订单管理、工厂对接等服务",
+    description="锦绣智造应用后端 API - 提供 AI 设计生成、订单管理、工厂对接等服务",
     lifespan=lifespan
 )
 

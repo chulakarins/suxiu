@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     """应用配置"""
 
     # 应用基础配置
-    APP_NAME: str = "苏绣 AI 后端"
+    APP_NAME: str = "锦绣智造后端"
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = False
 

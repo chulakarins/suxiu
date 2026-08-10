@@ -1,5 +1,5 @@
 """
-苏绣 AI 后端应用
+锦绣智造后端应用
 """
 from app.main import app
 from app.config import settings
