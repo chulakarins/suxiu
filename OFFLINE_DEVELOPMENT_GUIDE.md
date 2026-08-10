@@ -1,4 +1,4 @@
-# 苏绣 AI 离线开发手册
+# 锦绣智造：离线开发手册
 
 更新时间：2026-08-02
 
@@ -17,10 +17,10 @@
 ```bash
 git clone https://github.com/chulakarins/suxiu.git
 cd suxiu
-open "suxiu test.xcodeproj"
+open "JinxiuZhizao.xcodeproj"
 ```
 
-打开后选择 `suxiu test` Scheme，选择 iOS 模拟器并运行。不需要填写 API Key，也不需要启动 `suxiu-backend`。
+打开后选择 `JinxiuZhizao` Scheme，选择 iOS 模拟器并运行。不需要填写 API Key，也不需要启动 `suxiu-backend`。
 
 如果命令行没有使用正确的 Xcode，可临时指定：
 
@@ -66,7 +66,7 @@ export DEVELOPER_DIR=/Applications/Xcode-beta.app/Contents/Developer
 ## 5. 添加或替换 Mock 图片
 
 1. 准备正方形 JPEG，建议 1254 × 1254、sRGB、质量约 90%。
-2. 放入 `suxiu test/Resources/MockImages/`。
+2. 放入 `JinxiuZhizao/Resources/MockImages/`。
 3. 在 `MockImageCatalog.entries` 或 `fallbackEntries` 增加条目。
 4. 更新 `Resources/MockImages/manifest.json`。
 5. 运行资源测试，确认图片被打进 App 包。
@@ -96,8 +96,8 @@ xcrun simctl list devices available
 只检查编译：
 
 ```bash
-xcodebuild -project "suxiu test.xcodeproj" \
-  -scheme "suxiu test" \
+xcodebuild -project "JinxiuZhizao.xcodeproj" \
+  -scheme "JinxiuZhizao" \
   -destination "generic/platform=iOS Simulator" \
   CODE_SIGNING_ALLOWED=NO build
 ```
@@ -105,11 +105,11 @@ xcodebuild -project "suxiu test.xcodeproj" \
 运行单元测试时，把设备名替换成电脑中存在的模拟器：
 
 ```bash
-xcodebuild -project "suxiu test.xcodeproj" \
-  -scheme "suxiu test" \
+xcodebuild -project "JinxiuZhizao.xcodeproj" \
+  -scheme "JinxiuZhizao" \
   -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
   -parallel-testing-enabled NO \
-  -only-testing:"suxiu testTests/MockImageGeneratorTests" \
+  -only-testing:"JinxiuZhizaoTests/MockImageGeneratorTests" \
   test
 ```
 

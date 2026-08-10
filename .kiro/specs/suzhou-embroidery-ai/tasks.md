@@ -1,8 +1,8 @@
-# 实现计划: 苏绣AI应用
+# 实现计划: 锦绣智造应用
 
 ## 概述
 
-基于Swift和iOS平台开发苏绣AI应用，实现从用户创意输入到AI设计生成，再到工厂制作的完整C2M流程。采用MVVM架构模式，集成Core Data进行本地数据管理，使用URLSession处理网络请求，结合Core Image和Vision框架进行图像处理。
+基于Swift和iOS平台开发锦绣智造应用，实现从用户创意输入到AI设计生成，再到工厂制作的完整C2M流程。采用MVVM架构模式，集成Core Data进行本地数据管理，使用URLSession处理网络请求，结合Core Image和Vision框架进行图像处理。
 
 ## 任务
 

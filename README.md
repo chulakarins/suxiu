@@ -1,4 +1,4 @@
-# 苏绣 AI · Suxiu AI
+# 锦绣智造 · Jinxiu Zhizao
 
 > 以 SwiftUI 构建的苏绣文化学习与 AI 创作比赛演示应用。当前版本采用完全本地的 Mock 生图流程，不需要 API Key，也不依赖生成服务网络。
 
@@ -29,6 +29,17 @@
 | 社区 | 六条创作记录、分类筛选、开放馆藏来源、可用的本地研习交流 |
 | 市集 | 现货、AI 定制和纹样授权的比赛演示流程 |
 
+## 命名约定
+
+| 使用场景 | 规范名称 |
+|---|---|
+| App、系统权限和中文文档中的品牌名 | `锦绣智造` |
+| Xcode Project、Scheme、主 Target 和 Swift Module | `JinxiuZhizao` |
+| 单元测试 / UI 测试 Target | `JinxiuZhizaoTests` / `JinxiuZhizaoUITests` |
+| 苏绣工艺、素材和领域代码 | 保留 `苏绣` / `Suxiu`，避免与品牌名混淆 |
+
+现有 Bundle Identifier `com.chulakarins.suxiu` 是安装与数据升级标识，本次品牌更名不修改它。仓库地址、后端目录、数据库和对象存储等已经存在的基础设施标识也保持不变。
+
 ## 快速开始
 
 ### 环境要求
@@ -42,10 +53,10 @@
 ```bash
 git clone https://github.com/chulakarins/suxiu.git
 cd suxiu
-open "suxiu test.xcodeproj"
+open "JinxiuZhizao.xcodeproj"
 ```
 
-在 Xcode 中选择 `suxiu test` Scheme 和一个 iOS 模拟器，按 `⌘R`。当前版本不需要配置服务器地址或 API Key。
+在 Xcode 中选择 `JinxiuZhizao` Scheme 和一个 iOS 模拟器，按 `⌘R`。当前版本不需要配置服务器地址或 API Key。
 
 ### 命令行验证
 
@@ -53,8 +64,8 @@ open "suxiu test.xcodeproj"
 
 ```bash
 DEVELOPER_DIR=/Applications/Xcode-beta.app/Contents/Developer \
-xcodebuild -project "suxiu test.xcodeproj" \
-  -scheme "suxiu test" \
+xcodebuild -project "JinxiuZhizao.xcodeproj" \
+  -scheme "JinxiuZhizao" \
   -destination "generic/platform=iOS Simulator" \
   CODE_SIGNING_ALLOWED=NO build
 ```
@@ -92,7 +103,7 @@ Mock 设置入口：AI 创作页右上角 `…` → `Mock 开发设置`。比赛
 ## 核心目录
 
 ```text
-suxiu test/
+JinxiuZhizao/
 ├── Core/
 │   ├── Configuration/       # 服务选择与 Mock 配置
 │   ├── Generation/          # 生图协议、状态和错误定义
